@@ -1,0 +1,20 @@
+<% include _header %>
+
+
+
+<form action="/signup" method="post" enctype="multipart/form-data">
+ <div class="input-group"> <span class="input-group-addon">Username</i></span>
+  <input name="username" type="text" class="form-control" placeholder="Username" required autofocus></div>
+  
+  <div class="input-group"><span class="input-group-addon">Password</i></span>
+  <input name="password" type="password" class="form-control" placeholder="Password" required></div>
+  
+  <div class="input-group"><span class="input-group-addon">Name</span>
+  <input name="name" type="text" class="form-control" placeholder="Name" required></div>
+  
+  <div class="input-group"><span class="input-group-addon">bio</span>
+  <input name="bio" placeholder="Bio" class="form-control input-sm" id="inputsm" type="text"></div>
+  <input type="submit" value="Sign up" class="btn btn-primary btn-block">
+</form>
+
+<% include _footer %>

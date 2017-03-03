@@ -1,0 +1,12 @@
+<% include _header %>
+
+
+<form action="/edit" method="post" enctype="multipart/form-data">
+    <h4>Upload profile picture(optional)</h4>
+    <input type="file" name="myImage" id="1" />
+        <br>
+        <h4>Name<h4> <input type='text' id='2' name='other3' value= <%= currentUser.name() %> required><br><br>
+        
+        <input type="submit" value="Save changes" class="btn btn-primary" width="100"/><div>
+</form>
+<% include _footer %>

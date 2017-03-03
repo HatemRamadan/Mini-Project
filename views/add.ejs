@@ -1,0 +1,43 @@
+<% include _header %>
+<script type="text/javascript">
+
+
+  function yesnoCheck() {
+    if (document.getElementById('yesCheck').checked) {
+        document.getElementById('ifYes').style.display = 'block';
+        document.getElementById('ifNo').style.display = 'none';
+        document.getElementById('other3').value = "";
+        document.getElementById('other3').removeAttribute("required");
+          document.getElementById('1').setAttribute("required","");
+    }
+    else {document.getElementById('ifYes').style.display = 'none';
+          document.getElementById('ifNo').style.display = 'block';
+          document.getElementById('1').value = "";
+          document.getElementById('1').removeAttribute("required");
+          document.getElementById('other3').setAttribute("required","");}
+}
+</script>
+
+<form action="/add" method="post" enctype="multipart/form-data" class="form-group">
+ <div class="input-group"> <span class="input-group-addon">Title</i></span>
+  <input name="title" type="text" class="form-control" placeholder="title" required autofocus></div>
+<div class="form-group">
+<h3>Choose either Link or a Screenshot</h3>
+<label class="checkbox-inline"><input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="yesCheck" checked = "checked">Screenshot </label> 
+ <label class="checkbox-inline"><input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="noCheck">Link</label><br>
+    </div>
+    <div id="ifYes" style="display:block">
+        <h3>Upload a screenshot</h3>
+         <input type="file" name="myImage" id="1" required/>
+        <br>
+        
+    </div>
+        <div id="ifNo" style="display:none" class ="form-group"> 
+       <h4>Link</h4> <input type='text' id='other3' name='other3' placeholder="link"><br>
+        </div>
+        </btn-primary>
+        <div class="form-group">
+        <input type="submit" value="Add work" class="btn btn-primary" width="100"/>
+        </div>
+</form>
+<% include _footer %>

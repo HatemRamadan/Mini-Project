@@ -1,0 +1,39 @@
+  <% include _header %>
+  <script type="text/javascript">
+
+
+    function yesnoCheck() {
+      if (document.getElementById('yesCheck').checked) {
+          document.getElementById('ifYes').style.display = 'block';
+          document.getElementById('ifNo').style.display = 'none';
+          document.getElementById('other3').value = "";
+          document.getElementById('other3').removeAttribute("required");
+          document.getElementById('1').setAttribute("required","");
+      }
+      else {document.getElementById('ifYes').style.display = 'none';
+            document.getElementById('ifNo').style.display = 'block';
+            document.getElementById('1').value = "";
+            document.getElementById('1').removeAttribute("required");
+          document.getElementById('other3').setAttribute("required","");}
+  }
+  </script>
+  <h3>You have to add at least one work to create a portfolio</h3>
+  <form action="/createPortfolio" method="post" enctype="multipart/form-data">
+   <div class="input-group"> <span class="input-group-addon">Project title</i></span>
+    <input name="title" type="text" class="form-control" placeholder="title" required autofocus></div>
+     <h4> Upload a profile picture (optional)</h4> <div class="form-group"><input type="file" name="myImage2" /></div>
+     <h4> choose either link or screenshot</h4>
+     <div class = "form-group">
+  <label class="bg-warning">Screenshot<label> <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="yesCheck" checked = "checked"> Link <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="noCheck"><br>
+      </div>
+      <div id="ifYes" style="display:block">
+          <h4>Upload a screenshot</h4> <input type="file" name="myImage" id="1" required/>
+          <br>
+          
+      </div>
+          <div id="ifNo" style="display:none"> 
+         Link <input type='text' id='other3' name='other3'><br>
+          </div>
+          <input type="submit" value="Add work" class="btn btn-primary" width="100"/>
+  </form>
+  <% include _footer %>

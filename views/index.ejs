@@ -1,0 +1,93 @@
+	<% include _header %>
+
+	<h1>Welcome to My Portfolio!</h1>
+	<body>
+    <%if(!students){%>
+</br></br>
+    <h3>No portfolios yet :(</h3>
+    <%}else{%>
+		<div class="container">
+			<h1>Students</h1>
+
+			<ul class="list-group">
+				<% students.forEach( function( student ) { %>
+				<li class="list-group-item"><a href="/users/<%= student.username%>"><h2><%= student.displayName %>'s works</h2></a>
+					<%if(student.works.length>1){%>
+					<%if(student.works[0].link){%>
+					<div class="panel panel-default">
+						<div class="panel-heading"><%=student.works[0].title%></div>
+						<div class="panel-body"><a href="<%=student.works[0].link%>" >View website</a></div>
+					</div>
+					<%}else{%>
+					<div class="panel panel-default">
+						<div class="panel-heading"><%=student.works[0].title%></div>
+						<div class="panel-body"><img class="avatar img-rounded" src="data:image/png;base64,<%= (student.works[0].img.data.toString('base64'))%>" width="100" height="100"/></div>
+					</div>
+					<%}%>
+					<%if(student.works[1].link){%>
+					<div class="panel panel-default">
+						<div class="panel-heading"><%=student.works[1].title%></div>
+						<div class="panel-body"><a href="<%=student.works[1].link%>" >View website</a></div>
+					</div>
+					<%}else{%>
+					<div class="panel panel-default">
+						<div class="panel-heading"><%=student.works[1].title%></div>
+						<div class="panel-body"><img class="avatar img-rounded" src="data:image/png;base64,<%= (student.works[1].img.data.toString('base64'))%>" width="100" height="100"/></div>
+					</div>
+					<%}%>
+					<%}else{%>
+					<%if(student.works[0].link){%>
+					<div class="panel panel-default">
+						<div class="panel-heading"><%=student.works[0].title%></div>
+						<div class="panel-body"><a href="<%=student.works[0].link%>" >View website</a></div>
+					</div>
+					<%}else{%>
+					<div class="panel panel-default">
+						<div class="panel-heading"><%=student.works[0].title%></div>
+						<div class="panel-body"><img class="avatar img-rounded" src="data:image/png;base64,<%= (student.works[0].img.data.toString('base64'))%>" width="100" height="100"/></div>
+					</div>
+					<%}%>
+					<%}%>
+				</li>
+			</br>
+			<% }) %>
+
+		</ul>
+
+		<% if (pageCount > 1) { %>
+		<ul class="pagination">
+			<% if (currentPage > 1) { %>
+			<li><a href="/?page=1">&laquo;</a></li>
+			<% } %>
+			<% var i = 1;
+			if (currentPage > 5) {
+				i = +currentPage - 4;
+			} %>
+			<% if (i !== 1) { %>
+			<li class="disabled"><a href="#">...</a></li>
+			<% } %>
+			<% for (i; i<=pageCount; i++) { %>
+			<% if (currentPage == i) { %>
+			<li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
+			<% } else { %>
+			<li><a href="/?page=<%= i %>"><%= i %></a></li>
+			<% } %>
+			<% if (i == (+currentPage + 4)) { %>
+			<li class="disabled"><a href="#">...</a></li>
+			<% break; } %>
+			<% } %>
+			<% if (currentPage != pageCount) { %>
+			<li><a href="/?page=<%= pageCount %>">&raquo;</a></li>
+			<% } %>
+		</ul>
+		<% } %>
+
+	</div>
+<%}%>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+
+<% include _footer %>

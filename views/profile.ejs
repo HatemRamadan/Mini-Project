@@ -1,0 +1,64 @@
+	<% include _header %>
+	<%if(!pic) {%>
+	<img class="avatar img-circle" src="/img/image.png" width="200" height="200" />
+	<%} else{ %>
+
+	<img class="avatar img-circle" src="data:image/png;base64,<%= (pic.img.data.toString('base64'))%>" width="200" height="200"/>
+	<%}%>
+
+	<% if ((currentUser) && (currentUser.id === user.id)&&(user.hasPortfolio==1)) { %>
+	<a href="/edit" class="pull-right">Edit your profile</a>
+	<% } %>
+
+	<h1><%= user.name() %></h1>
+	
+
+	<% if (user.bio) { %> <h2>Biography:</h2>
+	<p><%= user.bio %></p>
+	<% } %>
+</br>
+	<% if ((currentUser) && (currentUser.id === user.id)) { %>
+	<%if(user.hasPortfolio==1){%>
+	<form action="/add" method="get">
+		<div><input type="submit" class="btn btn-primary" value="Add work"name="Submit" id="frm2_submit" /></div>
+
+	</form>
+	<%} else{ %>
+	<form action="/createPortfolio" method="get">
+		<div><input type="submit" class="btn btn-primary" value="Create Portfolio"name="Submit" id="frm1_submit" /></div>
+
+	</form>
+	<%}%>
+	<%}%>
+	<br/>
+	<%if(user.hasPortfolio==1){%>
+	<div class="panel panel-default">
+
+		<div class="panel-heading">Works</div>
+
+		<div class="panel-body">
+			<% user.works.forEach(function(work) { %>
+			<%if(work.link){ %>
+			<div class="panel panel-default">
+				<div class="panel-heading"><%=work.title%></div>
+				<div class="panel-body"><a href="<%=work.link%>" ><%=work.link%></a></div>
+
+			</div>
+			<%}else{ if(work.img.data){%>
+			<div class="panel panel-default">
+				<div class="panel-heading"><%=work.title%></div>
+				<div class="panel-body"><img class="avatar img-rounded" src="data:image/png;base64,<%= (work.img.data.toString('base64'))%>" width="200" height="200"/></div>
+
+			</div>
+			
+			<%}}})%>
+
+			
+		</div>
+
+	</div>
+	<%}%>
+
+
+
+	<% include _footer %>
